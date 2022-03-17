@@ -1,3 +1,7 @@
+{{ config(
+    materialized = 'ephemeral'
+) }}
+
 WITH orders AS (
     SELECT
         *
@@ -13,7 +17,7 @@ payments AS (
 order_payments AS (
     SELECT
         order_id
-        , sum(case when status = 'success' then amount end) as amount
+        , sum(CASE WHEN status = 'success' THEN amount END) AS amount
     FROM payments
     GROUP BY 1
 ),
@@ -23,9 +27,9 @@ final AS (
         orders.order_id
         , orders.customer_id
         , orders.order_date
-        , coalesce(order_payments.amount, 0) as amount
+        , coalesce(order_payments.amount, 0) AS amount
     FROM orders
-    LEFT JOIN order_payments using (order_id)
+    LEFT JOIN order_payments USING (order_id)
 )
 
 SELECT * FROM final

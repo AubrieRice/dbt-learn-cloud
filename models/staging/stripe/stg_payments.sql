@@ -1,9 +1,9 @@
 SELECT
-    id as payment_id
-    , orderid as order_id
-    , paymentmethod as payment_method
+    id AS payment_id
+    , orderid AS order_id
+    , paymentmethod AS payment_method
     , status
-    , {{ cents_to_dollars('amount') }} as amount
-    , created as created_at
+    , {{ cents_to_dollars('amount') }} AS amount
+    , created AS created_at
 
 FROM {{ source('stripe','payment') }}

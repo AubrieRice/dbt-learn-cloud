@@ -1,0 +1,11 @@
+version: 2
+
+sources:
+  - name: snowplow
+    database: snowplow_dev
+    schema: atomic
+    loaded_at_field: collector_tstamp
+    freshness:
+        error_after: { count: 1, period: hour}
+    tables:
+      - name: events

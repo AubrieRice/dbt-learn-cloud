@@ -5,7 +5,7 @@ WITH payments AS (
 
 SELECT
     order_id
-    , sum(amount) as total_amount
+    , sum(amount) AS total_amount
 FROM payments
 GROUP BY 1
 HAVING total_amount < 0
